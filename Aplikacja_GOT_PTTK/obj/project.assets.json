@@ -6141,19 +6141,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jakub\\.nuget\\packages\\": {}
+    "C:\\Users\\Dell\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jakub\\PO_project_got\\Aplikacja_GOT_PTTK\\Aplikacja_GOT_PTTK.csproj",
+      "projectUniqueName": "C:\\Users\\Dell\\source\\PO\\PO\\Aplikacja_GOT_PTTK\\Aplikacja_GOT_PTTK.csproj",
       "projectName": "Aplikacja_GOT_PTTK",
-      "projectPath": "C:\\Users\\jakub\\PO_project_got\\Aplikacja_GOT_PTTK\\Aplikacja_GOT_PTTK.csproj",
-      "packagesPath": "C:\\Users\\jakub\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jakub\\PO_project_got\\Aplikacja_GOT_PTTK\\obj\\",
+      "projectPath": "C:\\Users\\Dell\\source\\PO\\PO\\Aplikacja_GOT_PTTK\\Aplikacja_GOT_PTTK.csproj",
+      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dell\\source\\PO\\PO\\Aplikacja_GOT_PTTK\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jakub\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6218,7 +6218,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
