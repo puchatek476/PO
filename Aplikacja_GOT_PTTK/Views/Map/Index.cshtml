@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Mapa";
 }
+@using Aplikacja_GOT_PTTK.Controllers;
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin="" />
@@ -21,7 +23,26 @@
             accessToken: 'pk.eyJ1IjoicHVjaGF0ZWs0NzYiLCJhIjoiY2t5b2o4NDJ5MDBvdjMxbXYyanhod3Y2ZyJ9.HBtLjo7cNAieBSeZXPoD3w'
         }).addTo(map);
 
-        var marker = L.marker([49.573551582627076, 19.53083928222616]).addTo(map);
+        function onMarkerClick(e) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Test")",
+                data: { lat: e.latlng.lat.toString(),
+                    lng: e.latlng.lng.toString()}
+            });
+        }
+
+        @foreach (GeoPointModel p in ViewBag.Punkty)
+        {
+            <text>
+            L.marker([parseFloat(@(p.Latitude)), parseFloat(@(p.Longitude))])
+            .addTo(map)
+            .bindPopup("<b>@(p.Name)</b>").openPopup()
+            .on('click', onMarkerClick);
+            </text>
+         }
+
+
     }
 </script>
 <h1>Mapa gór</h1>
