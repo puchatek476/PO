@@ -17,6 +17,7 @@ namespace Aplikacja_GOT_PTTK.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<GeoPointModel> GeoPointModel { get; set; }
