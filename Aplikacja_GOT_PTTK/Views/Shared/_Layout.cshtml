@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body background="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80" background-size="auto">
+<body background="https://th.bing.com/th/id/R.22706b71f1a88d2863d61035c9559f2e?rik=hhxkHlm4iCEv5A&riu=http%3a%2f%2fs1.picswalls.com%2fwallpapers%2f2014%2f02%2f08%2fwinter-image_033823701_27.jpg&ehk=%2f%2br%2fdSghQRZ5wSQi5d%2b0RxD5vrQWD3Z6PNkfEF2HnDY%3d&risl=&pid=ImgRaw&r=0">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -24,6 +24,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Index">Mapa</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                        <li class="nav-item">
+                            <a 
+                               class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="ShowTrips">Moje wycieczki</a>
+                        </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
