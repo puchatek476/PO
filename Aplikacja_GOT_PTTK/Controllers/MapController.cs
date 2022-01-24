@@ -92,7 +92,8 @@ namespace Aplikacja_GOT_PTTK.Controllers
         public ActionResult SavePoints()
         {
             System.Diagnostics.Debug.WriteLine("Save points");
-            return View();
+            ViewBag.Info = "Pomyślnie zapisano trasę";
+            return View("~/Views/Home/Index.cshtml");
         }
 
         public async Task<IActionResult> IndexAsync()
