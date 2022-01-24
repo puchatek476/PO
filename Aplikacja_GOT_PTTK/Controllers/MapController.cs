@@ -63,9 +63,12 @@ namespace Aplikacja_GOT_PTTK.Controllers
             (g.Name, g.Height) = getNameAndAlt(lat, lng);
             g.Latitude = lat;
             g.Longitude = lng;
+            ViewBag.StartPointName = g.Name;
+            if(ViewBag.StartPointName != null)
+            {
+                ViewBag.EndPointName = g.Name;
+            }
             System.Diagnostics.Debug.WriteLine("Dodano: " + g);
-
-
             AddPoint(g);
         }
 
@@ -76,6 +79,11 @@ namespace Aplikacja_GOT_PTTK.Controllers
             if(currentPath.Count == 2)
             {
                 System.Diagnostics.Debug.WriteLine("Distance [km] " + getDistance(currentPath[0], currentPath[1]));
+                double distance = getDistance(currentPath[0], currentPath[1]);
+                double height = Math.Abs(Convert.ToDouble(currentPath[0].Height) - Convert.ToDouble(currentPath[1].Height))/100;
+                double sumOfPoints = distance * 1 + height * 1;
+                System.Diagnostics.Debug.WriteLine("Points: " + sumOfPoints);
+                ViewBag.SumPoints = sumOfPoints;
             }
             return View();
         }
@@ -83,7 +91,6 @@ namespace Aplikacja_GOT_PTTK.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             ViewBag.Punkty = await _context.GeoPointModel.ToListAsync();
-
             return View();
         }
     }
