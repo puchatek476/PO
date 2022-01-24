@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Aplikacja_GOT_PTTK.Models.PathModel> 
+@using Aplikacja_GOT_PTTK.Models;
+@{
+    <h1>Moje wycieczki</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Punkt początkowy
+                </th>
+                <th>
+                    Punkt końcowy
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                   Liczba punktów GOT
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.punktPocz)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.punktKonc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GOTPoints)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

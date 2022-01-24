@@ -11,8 +11,7 @@ namespace Aplikacja_GOT_PTTK.Models
     {
         [Key]
         public int PathId { get; set; }
-        [Required]
-        public List<GeoPointModel> Points { get; set; }
+        
         [Required]
         [ForeignKey("AccountId")]
         public AccountModel OwnerAccount { get; set; }
@@ -20,5 +19,18 @@ namespace Aplikacja_GOT_PTTK.Models
         public DateTime StartDate { get; set; }
         [Required]
         public int GOTPoints { get; set; }
+
+        [Required]
+        public string punktPocz { get; set; }
+        public GeoPointModel punktPP { get; set; }
+
+        [Required]
+        public string punktKonc { get; set; }
+        public GeoPointModel punktPK { get; set; }
+
+        public override string ToString()
+        {
+            return "Trasa " + GOTPoints;
+        }
     }
 }

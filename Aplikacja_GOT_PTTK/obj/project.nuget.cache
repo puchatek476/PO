@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "VOocw/NBhhDOCBlzpTHdTCJPXDx3h9kvq5oRdJ++7aJjdTgBvvXbID2fRQcF/M1i3tAIMvksJgrOFIK5L7dd/w==",
+  "dgSpecHash": "8w9H7eIatziSrnzfkKBVCSW4RnpRZ7EfaEm1viBNS4l4pDQYHqeGEOf0eyPckZO+7xAP/Qc0+3FmwtDaKnRFGQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\jakub\\PO_project_got\\Aplikacja_GOT_PTTK\\Aplikacja_GOT_PTTK.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jakub\\.nuget\\packages\\elasticsearch.net\\7.16.0\\elasticsearch.net.7.16.0.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\extended.wpf.toolkit\\4.2.0\\extended.wpf.toolkit.4.2.0.nupkg.sha512",
     "C:\\Users\\jakub\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jakub\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.10\\microsoft.aspnetcore.cryptography.internal.5.0.10.nupkg.sha512",
     "C:\\Users\\jakub\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.10\\microsoft.aspnetcore.cryptography.keyderivation.5.0.10.nupkg.sha512",
@@ -142,5 +143,16 @@
     "C:\\Users\\jakub\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\jakub\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Pakiet „Extended.Wpf.Toolkit 4.2.0” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8” zamiast platformy docelowej projektu „net5.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "libraryId": "Extended.Wpf.Toolkit",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }

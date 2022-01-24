@@ -11,6 +11,11 @@ namespace Aplikacja_GOT_PTTK.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<PathModel>().HasData(
+            //    new PathModel()
+            //    {
+
+            //    });
             modelBuilder.Entity<GeoPointModel>().HasData(
                 new GeoPointModel()
                 {
@@ -94,7 +99,7 @@ namespace Aplikacja_GOT_PTTK.Data
                                        }
 
 
-                ); ;
+                );
 
         }
     }

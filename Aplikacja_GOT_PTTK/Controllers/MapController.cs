@@ -1,5 +1,6 @@
 ﻿using Aplikacja_GOT_PTTK.Data;
 using Aplikacja_GOT_PTTK.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Nest;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Xceed.Wpf.Toolkit;
 
 namespace Aplikacja_GOT_PTTK.Controllers
 {
@@ -16,6 +18,8 @@ namespace Aplikacja_GOT_PTTK.Controllers
         private readonly ApplicationDbContext _context;
 
         static List<GeoPointModel> currentPath = new List<GeoPointModel>();
+        static int sumPoints = 0;
+        
 
         public MapController(ApplicationDbContext context)
         {
@@ -55,10 +59,8 @@ namespace Aplikacja_GOT_PTTK.Controllers
         }
 
         [HttpPost]
-        public void Test(string lat, string lng)
+        public void AddPointHelper(string lat, string lng)
         {
-            
-            
             var g = new GeoPointModel();
             (g.Name, g.Height) = getNameAndAlt(lat, lng);
             g.Latitude = lat;
@@ -77,7 +79,7 @@ namespace Aplikacja_GOT_PTTK.Controllers
         {
             currentPath.Add(point);
 
-            if(currentPath.Count == 2)
+            if (currentPath.Count == 2)
             {
                 System.Diagnostics.Debug.WriteLine("Distance [km] " + getDistance(currentPath[0], currentPath[1]));
                 double distance = getDistance(currentPath[0], currentPath[1]);
@@ -85,6 +87,7 @@ namespace Aplikacja_GOT_PTTK.Controllers
                 double sumOfPoints = distance * 1 + height * 1;
                 System.Diagnostics.Debug.WriteLine("Points: " + sumOfPoints);
                 ViewBag.SumPoints = sumOfPoints;
+                sumPoints = (int)Math.Round(sumOfPoints);
             }
             return View();
         }
@@ -92,8 +95,39 @@ namespace Aplikacja_GOT_PTTK.Controllers
         public ActionResult SavePoints()
         {
             System.Diagnostics.Debug.WriteLine("Save points");
-            ViewBag.Info = "Pomyślnie zapisano trasę";
+            ViewBag.Pocz = "Punkt początkowy: " + currentPath.First().Name;
+            ViewBag.Konc = "Punkt końcowy: " + currentPath.Last().Name;
+            ViewBag.Liczba = "Liczba punktów GOT: " + sumPoints;
+            ViewBag.Info = "Pomyślnie zapisano trasę.";
+
+            
+
+            PathModel trasa = new PathModel();
+            trasa.GOTPoints = sumPoints;
+            AccountModel acc = new AccountModel();
+            acc.BirthDate = DateTime.Today;
+            _context.AccountModel.Add(acc);
+
+            trasa.OwnerAccount = acc;
+            trasa.StartDate = DateTime.Now;
+
+            trasa.punktPK = currentPath.Last();
+            trasa.punktPP = currentPath.First();
+
+            trasa.punktPocz = currentPath.First().Name;
+            trasa.punktKonc = currentPath.Last().Name;
+
+            _context.PathModel.Add(trasa);
+            _context.SaveChangesAsync();
+
             return View("~/Views/Home/Index.cshtml");
+        }
+
+        public IActionResult Trip()
+        {
+            var pathList = _context.PathModel.ToList();
+            //ViewBag.Paths = _context.PathModel.ToList();
+            return View(pathList);
         }
 
         public async Task<IActionResult> IndexAsync()

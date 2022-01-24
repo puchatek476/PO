@@ -4,14 +4,16 @@ using Aplikacja_GOT_PTTK.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aplikacja_GOT_PTTK.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220124105445_init6")]
+    partial class init6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +32,12 @@ namespace Aplikacja_GOT_PTTK.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -65,7 +69,12 @@ namespace Aplikacja_GOT_PTTK.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PathModelPathId")
+                        .HasColumnType("int");
+
                     b.HasKey("GeoPointId");
+
+                    b.HasIndex("PathModelPathId");
 
                     b.ToTable("GeoPointModel");
 
@@ -168,27 +177,9 @@ namespace Aplikacja_GOT_PTTK.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("punktKonc")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("punktPKGeoPointId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("punktPPGeoPointId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("punktPocz")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("PathId");
 
                     b.HasIndex("AccountId");
-
-                    b.HasIndex("punktPKGeoPointId");
-
-                    b.HasIndex("punktPPGeoPointId");
 
                     b.ToTable("PathModel");
                 });
@@ -393,6 +384,13 @@ namespace Aplikacja_GOT_PTTK.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Aplikacja_GOT_PTTK.Models.GeoPointModel", b =>
+                {
+                    b.HasOne("Aplikacja_GOT_PTTK.Models.PathModel", null)
+                        .WithMany("Points")
+                        .HasForeignKey("PathModelPathId");
+                });
+
             modelBuilder.Entity("Aplikacja_GOT_PTTK.Models.PathModel", b =>
                 {
                     b.HasOne("Aplikacja_GOT_PTTK.Models.AccountModel", "OwnerAccount")
@@ -401,19 +399,7 @@ namespace Aplikacja_GOT_PTTK.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Aplikacja_GOT_PTTK.Models.GeoPointModel", "punktPK")
-                        .WithMany()
-                        .HasForeignKey("punktPKGeoPointId");
-
-                    b.HasOne("Aplikacja_GOT_PTTK.Models.GeoPointModel", "punktPP")
-                        .WithMany()
-                        .HasForeignKey("punktPPGeoPointId");
-
                     b.Navigation("OwnerAccount");
-
-                    b.Navigation("punktPK");
-
-                    b.Navigation("punktPP");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -465,6 +451,11 @@ namespace Aplikacja_GOT_PTTK.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Aplikacja_GOT_PTTK.Models.PathModel", b =>
+                {
+                    b.Navigation("Points");
                 });
 #pragma warning restore 612, 618
         }

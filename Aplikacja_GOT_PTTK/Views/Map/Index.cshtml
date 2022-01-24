@@ -26,11 +26,12 @@
         function onMarkerClick(e) {
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("Test")",
+                url: "@Url.Action("AddPointHelper")",
                 data: { lat: e.latlng.lat.toString(),
                     lng: e.latlng.lng.toString()}
             });
-            alert("Pomyślnie dodano punkt.");
+            alert("Pomyślnie dodano punkt");
+            
         }
 
         @foreach (GeoPointModel p in ViewBag.Punkty)

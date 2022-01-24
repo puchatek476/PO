@@ -4,14 +4,16 @@ using Aplikacja_GOT_PTTK.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Aplikacja_GOT_PTTK.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220124114127_init11")]
+    partial class init11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +32,12 @@ namespace Aplikacja_GOT_PTTK.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -172,12 +176,6 @@ namespace Aplikacja_GOT_PTTK.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("punktPKGeoPointId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("punktPPGeoPointId")
-                        .HasColumnType("int");
-
                     b.Property<string>("punktPocz")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -185,10 +183,6 @@ namespace Aplikacja_GOT_PTTK.Migrations
                     b.HasKey("PathId");
 
                     b.HasIndex("AccountId");
-
-                    b.HasIndex("punktPKGeoPointId");
-
-                    b.HasIndex("punktPPGeoPointId");
 
                     b.ToTable("PathModel");
                 });
@@ -401,19 +395,7 @@ namespace Aplikacja_GOT_PTTK.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Aplikacja_GOT_PTTK.Models.GeoPointModel", "punktPK")
-                        .WithMany()
-                        .HasForeignKey("punktPKGeoPointId");
-
-                    b.HasOne("Aplikacja_GOT_PTTK.Models.GeoPointModel", "punktPP")
-                        .WithMany()
-                        .HasForeignKey("punktPPGeoPointId");
-
                     b.Navigation("OwnerAccount");
-
-                    b.Navigation("punktPK");
-
-                    b.Navigation("punktPP");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
