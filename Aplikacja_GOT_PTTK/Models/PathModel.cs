@@ -10,10 +10,10 @@ namespace Aplikacja_GOT_PTTK.Models
     public class PathModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PathId { get; set; }
         
         [Required]
-        [ForeignKey("AccountId")]
         public AccountModel OwnerAccount { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
