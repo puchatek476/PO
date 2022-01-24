@@ -11,7 +11,9 @@ namespace Aplikacja_GOT_PTTK.Models
     public class AccountModel
     {
         [Key]
-        public int AccountId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string AccountId { get; set; }
+
         [ForeignKey("AccountId")]
         IdentityUser Owner { get; set; }
         [MaxLength(30)]

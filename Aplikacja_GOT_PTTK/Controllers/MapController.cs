@@ -19,11 +19,12 @@ namespace Aplikacja_GOT_PTTK.Controllers
 
         static List<GeoPointModel> currentPath = new List<GeoPointModel>();
         static int sumPoints = 0;
-        
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public MapController(ApplicationDbContext context)
+        public MapController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public (string, string) getNameAndAlt(string lat, string lng)
@@ -92,37 +93,42 @@ namespace Aplikacja_GOT_PTTK.Controllers
             return View();
         }
 
-        public ActionResult SavePoints()
+        public async Task<ActionResult> SavePointsAsync()
         {
+            
             System.Diagnostics.Debug.WriteLine("Save points");
             ViewBag.Pocz = "Punkt początkowy: " + currentPath.First().Name;
             ViewBag.Konc = "Punkt końcowy: " + currentPath.Last().Name;
             ViewBag.Liczba = "Liczba punktów GOT: " + sumPoints;
             ViewBag.Info = "Pomyślnie zapisano trasę.";
 
-            
+            var user = await _userManager.GetUserAsync(User);
 
+            var users = _context.AccountModel;
             PathModel trasa = new PathModel();
+            var userFound = users.Find(user.Id);
+            if (userFound == null)
+            {
+                AccountModel acc = new AccountModel();
+                acc.AccountId = user.Id;
+                acc.Name = user.UserName;
+                _context.AccountModel.Add(acc);
+            }
             trasa.GOTPoints = sumPoints;
-            AccountModel acc = new AccountModel();
-            acc.BirthDate = DateTime.Today;
-            _context.AccountModel.Add(acc);
-
-            trasa.OwnerAccount = acc;
             trasa.StartDate = DateTime.Now;
-
+            trasa.OwnerAccount = users.Find(user.Id);
             trasa.punktPK = currentPath.Last();
             trasa.punktPP = currentPath.First();
 
             trasa.punktPocz = currentPath.First().Name;
             trasa.punktKonc = currentPath.Last().Name;
 
+            currentPath.Clear();
             _context.PathModel.Add(trasa);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return View("~/Views/Home/Index.cshtml");
         }
-
         public IActionResult Trip()
         {
             var pathList = _context.PathModel.ToList();
