@@ -23,11 +23,5 @@ namespace Aplikacja_GOT_PTTK.Models
         {
             return "Point: " + Name + " lat: " + Latitude + " long: " + Longitude + " height: " + Height;
         }
-        //public GeoPointModel(double lat, double longi, string name)
-        //{
-        //    Latitude = lat;
-        //    Longitude = longi;
-        //    Name = name;
-        //}
     }
 }

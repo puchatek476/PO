@@ -68,10 +68,11 @@ namespace Aplikacja_GOT_PTTK.Controllers
             {
                 ViewBag.EndPointName = g.Name;
             }
-            System.Diagnostics.Debug.WriteLine("Dodano: " + g);
+            //System.Diagnostics.Debug.WriteLine("Pomyślnie dodano punkt.");
             AddPoint(g);
         }
 
+        [HttpPost]
         public ActionResult AddPoint(GeoPointModel point)
         {
             currentPath.Add(point);
@@ -85,6 +86,12 @@ namespace Aplikacja_GOT_PTTK.Controllers
                 System.Diagnostics.Debug.WriteLine("Points: " + sumOfPoints);
                 ViewBag.SumPoints = sumOfPoints;
             }
+            return View();
+        }
+
+        public ActionResult SavePoints()
+        {
+            System.Diagnostics.Debug.WriteLine("Save points");
             return View();
         }
 

@@ -30,6 +30,7 @@
                 data: { lat: e.latlng.lat.toString(),
                     lng: e.latlng.lng.toString()}
             });
+            alert("Pomyślnie dodano punkt.");
         }
 
         @foreach (GeoPointModel p in ViewBag.Punkty)
@@ -41,11 +42,10 @@
             .on('click', onMarkerClick);
             </text>
          }
-
-
     }
 </script>
 <h1>Mapa gór</h1>
-
-<div id="map" style="margin: auto; height: 500px; width:70%"></div>
+<p>Dodawaj punkty do trasy poprzez wybieranie ich z mapy.</p>
+<input type="button" value="Zapisz"  />
+    <div id="map" style="margin: auto; height: 500px; width:70%"></div>
 
